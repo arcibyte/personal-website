@@ -1,13 +1,13 @@
 ---
 interface Props {
   title: string;
+  lang?: string;
 }
-
-const { title } = Astro.props;
+const { title, lang } = Astro.props;
 import Header from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 
-const currentLang = Astro.currentLocale || "es";
+const currentLang = lang || Astro.currentLocale || "es";
 ---
 
 <!doctype html>
@@ -19,7 +19,6 @@ const currentLang = Astro.currentLocale || "es";
     <meta name="author" content="Jhon Arciniegas" />
     <link rel="icon" href="https://arcibyte.vercel.app/img/icon.png" />
 
-    <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Jhon Arciniegas | Portfolio" />
     <meta
@@ -30,26 +29,7 @@ const currentLang = Astro.currentLocale || "es";
       property="og:image"
       content="https://arcibyte.vercel.app/img/OP.jpg"
     />
-    <meta property="og:image:width" content="1620" />
-    <meta property="og:image:height" content="1080" />
     <meta property="og:url" content="https://www.arcibyte.vercel.app" />
-    <meta property="og:site_name" content="Jhon Arciniegas | Portfolio" />
-
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Data Science & AI Engineer" />
-    <meta
-      name="twitter:description"
-      content="Data science practitioner bridging intelligent systems and modern interfaces."
-    />
-    <meta
-      name="twitter:image"
-      content="https://arcibyte.vercel.app/img/OP.jpg"
-    />
-    <meta
-      name="twitter:image:alt"
-      content="Portfolio preview of Jhon Arciniegas | Data Science and AI Engineer"
-    />
 
     <title>{title}</title>
   </head>
@@ -66,7 +46,7 @@ const currentLang = Astro.currentLocale || "es";
 <style is:global>
   @font-face {
     font-family: "Inter-Regular";
-    src: url(../../public/fonts/Inter-Regular.otf) format("opentype");
+    src: url("/fonts/Inter-Regular.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -76,17 +56,10 @@ const currentLang = Astro.currentLocale || "es";
   h2,
   h3,
   h4,
-  h5 {
-    font-family: "Inter-Regular", sans-serif;
-  }
-
-  span {
-    font-family: "Inter-Regular", sans-serif;
-  }
-  p {
-    font-family: "Inter-Regular";
-  }
+  h5,
+  span,
+  p,
   a {
-    font-family: "Inter-Regular";
+    font-family: "Inter-Regular", sans-serif;
   }
 </style>

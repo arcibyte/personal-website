@@ -12,12 +12,13 @@ const currentLang = supportedLocales.includes(Astro.currentLocale as Locale)
 const translateUi = useTranslations(currentLang);
 const otherLang = currentLang === "en" ? "es" : "en";
 const label = otherLang.toUpperCase();
+
 const cleanPath = Astro.url.pathname.replace(/^\/(es|en)/, "") || "/";
 const switchTo = getRelativeLocaleUrl(otherLang, cleanPath);
 
 function localePath(lang: Locale, path: string) {
-  if (lang === "en") return path.startsWith("/") ? path : `/${path}`;
-  return `/es${path.startsWith("/") ? path : `/${path}`}`;
+  const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
+  return `/${lang}/${normalizedPath}`;
 }
 
 const homeHref = localePath(currentLang, "/");
