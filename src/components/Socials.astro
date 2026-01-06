@@ -4,7 +4,7 @@ import { useTranslations } from "../i18n/utils";
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 import { socials } from "../data/socials";
-import SocialItem from "./SocialItem.astro";
+import SocialItem from "../helpers/SocialItem.astro";
 ---
 
 <section class="mx-auto mt-8 max-w-5xl text-primary">

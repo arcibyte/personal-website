@@ -1,17 +1,16 @@
 ---
 import Layout from "./Layout.astro";
-const { frontmatter } = Astro.props;
+const { title, lang } = Astro.props;
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={title} lang={lang}>
   <section class="relative max-w-3xl mx-auto py-6 bg-background">
     <div class="mb-12 text-center">
       <h1 class="text-2xl font-bold text-foreground tracking-tight">
-        {frontmatter.title}
+        {title}
       </h1>
     </div>
 
-    <!-- Content Slot -->
     <article
       class="prose prose-invert max-w-none leading-relaxed
          prose-headings:text-primary

@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/PostLayout.astro
 title: "Why do I use Arch?"
 pubDate: 2025-12-23
 description: "I share my experience using Arch Linux as my daily driver operating system, its advantages and why it's an environment I really enjoy."

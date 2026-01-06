@@ -1,0 +1,83 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { initTranslations } from "../../i18n/translate";
+
+export async function getStaticPaths() {
+    return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
+}
+
+const { lang } = Astro.params;
+const currentLang = lang || "es";
+const { t } = initTranslations(Astro.url);
+
+const allPosts = await getCollection("blog");
+
+const posts = allPosts
+    .filter((post: CollectionEntry<"blog">) =>
+        post.id.startsWith(`${currentLang}/`),
+    )
+    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+    .map((post) => ({
+        title: post.data.title,
+        date: post.data.pubDate,
+        url: `/${currentLang}/posts/${post.id
+            .split("/")
+            .pop()
+            ?.replace(/\.(md|mdx)$/, "")}`,
+        displayDate: post.data.pubDate.toLocaleDateString(
+            currentLang === "es" ? "es-ES" : "en-US",
+            {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            },
+        ),
+    }));
+
+const pageTitle = currentLang === "es" ? "Artículos del blog" : "Blog posts";
+---
+
+<Layout title={pageTitle} lang={currentLang}>
+    <section class="max-w-4xl mx-auto py-6">
+        <header class="mb-12">
+            <h1 class="text-2xl font-bold text-primary">
+                {t("title.blog")}
+            </h1>
+            <p class="text-sm uppercase tracking-widest text-foreground">
+                {t("subtitle.blog")}
+            </p>
+        </header>
+
+        {
+            posts.length === 0 ? (
+                <div class="p-8 border-2 border-dashed rounded-lg text-center">
+                    <p>
+                        No posts found in:{" "}
+                        <code class="bg-muted px-1">
+                            src/content/blog/{currentLang}/
+                        </code>
+                    </p>
+                </div>
+            ) : (
+                <ul class="space-y-6">
+                    {posts.map((post) => (
+                        <li class="group border-l-4 border-transparent hover:border-accent pl-4 transition-all">
+                            <a href={post.url} class="block">
+                                <h2 class="text-lg font-semibol text-primary">
+                                    {post.title}
+                                </h2>
+                                <time
+                                    class="text-sm text-foreground"
+                                    datetime={post.date.toISOString()}
+                                >
+                                    {post.displayDate}
+                                </time>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            )
+        }
+    </section>
+</Layout>
