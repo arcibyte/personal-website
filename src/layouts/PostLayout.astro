@@ -6,8 +6,18 @@ const { title, lang } = Astro.props;
 <Layout title={title} lang={lang}>
   <section class="relative max-w-3xl mx-auto py-6 bg-background">
     <div class="mb-12 text-center">
-      <h1 class="text-2xl font-bold text-foreground tracking-tight">
-        {title}
+      <h1 class="text-2xl font-bold text-primary">
+        <div class="relative inline-block">
+          {title}
+          <div
+            class="absolute -bottom-2 left-0 right-0 h-3 bg-accent -rotate-1"
+          >
+          </div>
+          <div
+            class="absolute -bottom-3 left-2 right-4 h-2 bg-accent rotate-1 opacity-60"
+          >
+          </div>
+        </div>
       </h1>
     </div>
 

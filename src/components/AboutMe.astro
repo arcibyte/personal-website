@@ -7,16 +7,16 @@ const t = useTranslations(lang);
 
 <section class="relative mt-12 overflow-hidden text-foreground">
   <div class="mx-auto mb-6 flex max-w-5xl flex-col space-y-2">
-    <h2 class="pb-3 text-2xl font-black tracking-wider text-primary">
-      <span class="relative inline-block">
+    <h2 class="pb-3 text-3xl font-black text-primary">
+      <div class="relative inline-block">
         {t("aboutme.title")}
-        <span
-          class="absolute -bottom-2 left-0 right-0 -rotate-1 bg-green-400 h-3"
-          aria-hidden="true"></span>
-        <span
-          class="absolute -bottom-3 left-1 right-2 rotate-1 bg-green-400 opacity-60 h-2"
-          aria-hidden="true"></span>
-      </span>
+        <div class="absolute -bottom-2 left-0 right-0 h-3 bg-accent -rotate-1">
+        </div>
+        <div
+          class="absolute -bottom-3 left-2 right-4 h-2 bg-accent rotate-1 opacity-60"
+        >
+        </div>
+      </div>
     </h2>
 
     <div class="max-w-2xl space-y-4">

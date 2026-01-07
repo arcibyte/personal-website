@@ -42,9 +42,19 @@ const pageTitle = currentLang === "es" ? "Artículos del blog" : "Blog posts";
     <section class="max-w-4xl mx-auto py-6">
         <header class="mb-12">
             <h1 class="text-2xl font-bold text-primary">
-                {t("title.blog")}
+                <div class="relative inline-block">
+                    {t("title.blog")}
+                    <div
+                        class="absolute -bottom-2 left-0 right-0 h-3 bg-accent -rotate-1"
+                    >
+                    </div>
+                    <div
+                        class="absolute -bottom-3 left-2 right-4 h-2 bg-accent rotate-1 opacity-60"
+                    >
+                    </div>
+                </div>
             </h1>
-            <p class="text-sm uppercase tracking-widest text-foreground">
+            <p class="text-sm uppercase mt-3 tracking-widest text-foreground">
                 {t("subtitle.blog")}
             </p>
         </header>
@@ -60,19 +70,41 @@ const pageTitle = currentLang === "es" ? "Artículos del blog" : "Blog posts";
                     </p>
                 </div>
             ) : (
-                <ul class="space-y-6">
+                <ul class="space-y-3 max-w-xl">
                     {posts.map((post) => (
-                        <li class="group border-l-4 border-transparent hover:border-accent pl-4 transition-all">
+                        <li class="group">
                             <a href={post.url} class="block">
-                                <h2 class="text-lg font-semibol text-primary">
-                                    {post.title}
-                                </h2>
-                                <time
-                                    class="text-sm text-foreground"
-                                    datetime={post.date.toISOString()}
-                                >
-                                    {post.displayDate}
-                                </time>
+                                <div class="bg-neutral-100 border-2 border-primary rounded-lg p-2">
+                                    <div class="flex items-baseline gap-3 text-sm text-gray-600 mb-1.5">
+                                        <time
+                                            datetime={post.date.toISOString()}
+                                        >
+                                            {post.displayDate}
+                                        </time>
+                                        {post.readTime && (
+                                            <span>/ {post.readTime}</span>
+                                        )}
+                                    </div>
+
+                                    <h2
+                                        class="text-xl font-semibold text-primary mb-2 
+                               group-hover:underline group-hover:decoration-accent 
+                               group-hover:decoration-2 group-hover:underline-offset-4
+                               transition-all duration-200"
+                                    >
+                                        {post.title}
+                                    </h2>
+
+                                    {post.tags && post.tags.length > 0 && (
+                                        <div class="flex flex-wrap gap-2">
+                                            {post.tags.map((tag) => (
+                                                <span class="text-xs px-3 py-1">
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
                             </a>
                         </li>
                     ))}
