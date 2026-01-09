@@ -1,5 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { getEntry } from "astro:content";
 import { useTranslations } from "src/i18n/utils";
 
 const supportedLocales = ["en", "es"] as const;
@@ -14,7 +15,19 @@ const otherLang = currentLang === "en" ? "es" : "en";
 const label = otherLang.toUpperCase();
 
 const cleanPath = Astro.url.pathname.replace(/^\/(es|en)/, "") || "/";
-const switchTo = getRelativeLocaleUrl(otherLang, cleanPath);
+
+let switchTo = getRelativeLocaleUrl(otherLang, cleanPath);
+
+if (cleanPath.startsWith("/posts/")) {
+  const slug = cleanPath.split("/").filter(Boolean).pop();
+
+  if (slug) {
+    const entry = await getEntry("posts", `${otherLang}/${slug}`);
+    if (!entry) {
+      switchTo = getRelativeLocaleUrl(otherLang, "blog");
+    }
+  }
+}
 
 function localePath(lang: Locale, path: string) {
   const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
