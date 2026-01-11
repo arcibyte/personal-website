@@ -15,7 +15,7 @@ export const socials: Social[] = [
         handle: "arcibyte",
         href: "https://github.com/arcibyte",
         icon: Github,
-        color: "bg-zinc-100",
+        color: "bg-zinc-200",
     },
     {
         label: "LinkedIn",

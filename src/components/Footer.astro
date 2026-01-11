@@ -1,33 +1,38 @@
-<footer class="mt-20 border-t-2 border-primary py-8 text-sm tracking-tight">
+<footer class="mt-16 border-t-[3px] border-primary bg-background py-4 text-sm">
   <div
-    class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6"
+    class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8"
   >
-    <div class="flex items-center gap-2">
-      <div class="h-2 w-2 rounded-full bg-accent border border-primary"></div>
-      <p class="font-bold text-primary">
-        Open source <span class="mx-2 text-muted">/</span>
-        <span class="font-mono text-foreground uppercase tracking-widest"
-          >2026</span
-        >
+    <div class="flex items-center gap-3">
+      <div
+        class="h-3 w-3 rounded-full bg-accent border-2 border-foreground opacity-80"
+      >
+      </div>
+      <p class="font-black text-foreground tracking-tighter italic text-base">
+        Open source <span class="mx-2 text-muted/40">//</span>
+        <span class="font-mono text-muted/60">{new Date().getFullYear()}</span>
       </p>
     </div>
 
-    <div class="flex flex-wrap items-center justify-center gap-3">
-      <p class="text-foreground font-medium">Built with</p>
+    <div class="flex items-center gap-2">
+      <p class="text-foreground font-semibold tracking-widest text-[12px] mr-2">
+        Built with:
+      </p>
 
-      <span
-        class="px-2 py-0.5 border-2 border-primary text-primary text-xs rounded-md shadow-[2px_2px_0px_0px_oklch(var(--p))]"
+      <div
+        class="flex items-center border-2 border-foreground bg-foreground overflow-hidden"
       >
-        ASTRO
-      </span>
-
-      <span class="text-primary font-bold">+</span>
-
-      <span
-        class="px-2 py-0.5 border-2 border-primary bg-accent font-black text-xs rounded-md shadow-[2px_2px_0px_0px_oklch(var(--p))]"
-      >
-        TAILWIND
-      </span>
+        <span
+          class="px-2 py-0.5 bg-accent text-foreground font-black text-[10px] uppercase"
+        >
+          ASTRO
+        </span>
+        <span class="px-1.5 text-background font-bold text-xs"> + </span>
+        <span
+          class="px-2 py-0.5 bg-warning text-accent font-black text-[10px] uppercase"
+        >
+          TAILWIND
+        </span>
+      </div>
     </div>
   </div>
 </footer>

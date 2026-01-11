@@ -6,35 +6,36 @@ const { href, label, handle, color, icon: Icon } = Astro.props;
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    class="group flex flex-col sm:flex-row sm:items-center justify-between p-6 hover:bg-accent/10 transition-colors relative overflow-hidden"
+    class="group flex flex-col sm:flex-row sm:items-center justify-between p-6 hover:bg-foreground/[0.03] transition-colors border-b border-foreground last:border-none"
 >
-    <div class="flex items-center gap-6 z-10">
+    <div class="flex items-center gap-6">
         <div
-            class={`px-3 py-1 border-2 border-primary font-black text-xs uppercase -rotate-2 group-hover:rotate-0 transition-transform ${color} text-primary`}
+            class="px-2 py-0.5 border border-foreground text-muted font-bold text-[10px] uppercase"
         >
             {label}
         </div>
         <span
-            class="font-bold text-lg tracking-tighter group-hover:translate-x-2 transition-transform"
+            class="font-black text-xl tracking-tighter group-hover:translate-x-1 transition-transform"
         >
             {handle}
         </span>
     </div>
 
-    <div class="flex items-center gap-4 mt-4 sm:mt-0 z-10">
+    <div class="flex items-center gap-4 mt-4 sm:mt-0">
         <span
-            class="text-[10px] font-black opacity-0 group-hover:opacity-100 transition-opacity uppercase bg-primary text-background px-2 py-0.5"
+            class="text-[10px] font-black opacity-0 group-hover:opacity-100 uppercase bg-foreground text-background px-2 py-0.5 transition-opacity"
         >
-            Execute
+            Connect
         </span>
+
         <div
-            class="h-10 w-10 flex items-center justify-center border-2 border-primary group-hover:bg-primary group-hover:text-background transition-all"
+            class={`h-12 w-12 flex items-center justify-center border-[3px] border-foreground shadow-neo transition-all group-hover:shadow-none group-hover:translate-x-1 group-hover:translate-y-1 ${color}`}
         >
             {
                 Icon ? (
-                    <Icon class="h-5 w-5" />
+                    <Icon class="h-6 w-6" />
                 ) : (
-                    <span class="text-xl font-black">K</span>
+                    <span class="text-2xl font-black italic">K</span>
                 )
             }
         </div>

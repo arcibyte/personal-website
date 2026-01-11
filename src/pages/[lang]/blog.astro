@@ -33,82 +33,76 @@ const posts = allPosts
                 day: "numeric",
             },
         ),
+        tags: post.data.tags || [],
     }));
 
-const pageTitle = currentLang === "es" ? "Artículos del blog" : "Blog posts";
+const pageTitle = t("blog.title");
 ---
 
 <Layout title={pageTitle} lang={currentLang}>
-    <section class="max-w-4xl mx-auto py-6">
-        <header class="mb-12">
-            <h1 class="text-2xl font-bold text-primary">
-                <div class="relative inline-block">
-                    {t("title.blog")}
-                    <div
-                        class="absolute -bottom-2 left-0 right-0 h-3 bg-accent -rotate-1"
-                    >
-                    </div>
-                    <div
-                        class="absolute -bottom-3 left-2 right-4 h-2 bg-accent rotate-1 opacity-60"
-                    >
-                    </div>
-                </div>
-            </h1>
-            <p class="text-sm uppercase mt-3 tracking-widest text-foreground">
-                {t("subtitle.blog")}
-            </p>
+    <section class="max-w-3xl mx-auto py-12 px-2">
+        <header class="mb-8">
+            <div class="relative inline-block">
+                <h1
+                    class="text-3xl md:text-4xl font-black text-primary tracking-tighter relative z-10"
+                >
+                    {t("blog.title")}
+                </h1>
+            </div>
+            {
+                t("blog.subtitle") && (
+                    <p class="text-muted text-sm mt-2 font-medium uppercase tracking-tight">
+                        {t("blog.subtitle")}
+                    </p>
+                )
+            }
         </header>
 
         {
             posts.length === 0 ? (
-                <div class="p-8 border-2 border-dashed rounded-lg text-center">
-                    <p>
-                        No posts found in:{" "}
-                        <code class="bg-muted px-1">
-                            src/content/blog/{currentLang}/
-                        </code>
+                <div class="bg-background border-2 border-primary p-6 text-center shadow-neo">
+                    <p class="font-black text-foreground text-xs tracking-widest">
+                        {t("blog.empty")}
                     </p>
                 </div>
             ) : (
-                <ul class="space-y-3 max-w-xl">
+                <div class="flex flex-col gap-3">
                     {posts.map((post) => (
-                        <li class="group">
-                            <a href={post.url} class="block">
-                                <div class="bg-neutral-100 border-2 border-primary rounded-lg p-2">
-                                    <div class="flex items-baseline gap-3 text-sm text-gray-600 mb-1.5">
+                        <a href={post.url} class="group block">
+                            <article class="bg-background border-2 border-primary p-3 md:px-5 md:py-3 shadow-neo transition-all group-hover:shadow-none group-hover:translate-x-1 group-hover:translate-y-1">
+                                <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                                    <div class="flex flex-col gap-1">
                                         <time
                                             datetime={post.date.toISOString()}
+                                            class="text-[9px] font-black uppercase tracking-[0.2em] text-muted/60"
                                         >
                                             {post.displayDate}
                                         </time>
-                                        {post.readTime && (
-                                            <span>/ {post.readTime}</span>
-                                        )}
+
+                                        <h2 class="text-lg md:text-xl font-black text-foreground tracking-tighter uppercase| leading-none group-hover:text-accent transition-colors">
+                                            {post.title}
+                                        </h2>
                                     </div>
 
-                                    <h2
-                                        class="text-xl font-semibold text-primary mb-2 
-                               group-hover:underline group-hover:decoration-accent 
-                               group-hover:decoration-2 group-hover:underline-offset-4
-                               transition-all duration-200"
-                                    >
-                                        {post.title}
-                                    </h2>
+                                    <div class="flex items-center justify-between md:justify-end gap-4 mt-2 md:mt-0">
+                                        {post.tags.length > 0 && (
+                                            <span class="text-[9px] font-bold px-1.5 py-0.5 border border-foreground/10 bg-muted/5 text-muted uppercase">
+                                                {post.tags[0]}
+                                            </span>
+                                        )}
 
-                                    {post.tags && post.tags.length > 0 && (
-                                        <div class="flex flex-wrap gap-2">
-                                            {post.tags.map((tag) => (
-                                                <span class="text-xs px-3 py-1">
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    )}
+                                        <span class="text-[10px] font-black uppercase text-accent tracking-widest flex items-center gap-1 whitespace-nowrap">
+                                            {t("blog.read")}
+                                            <span class="group-hover:translate-x-1 transition-transform">
+                                                →
+                                            </span>
+                                        </span>
+                                    </div>
                                 </div>
-                            </a>
-                        </li>
+                            </article>
+                        </a>
                     ))}
-                </ul>
+                </div>
             )
         }
     </section>
