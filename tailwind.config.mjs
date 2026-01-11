@@ -4,13 +4,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "oklch(97% 0.001 106.424)",
-        primary: "oklch(26.8% 0.007 34.298)", //texto principal, encabezados
-        foreground: "oklch(44.4% 0.011 73.639)", //texto secuandario, UI suave
-        accent: "oklch(79.2% 0.209 151.711)", //enfasis visual
-        muted: "oklch(86.9% 0.005 56.366)", // bordes
-      }, 
+        background: "#F5F5F5", 
+        
+        foreground: "#001B2EB3",
+        
+        primary: {
+          DEFAULT: "#001B2E", 
+        },
 
+        accent: "#FEB05D",
+      },
+      boxShadow: {
+        'neo': '8px 8px 0px 0px #001B2E',
+        'neo-sm': '4px 4px 0px 0px #001B2E',
+        'neo-hover': '2px 2px 0px 0px #001B2E',
+      },
+      borderWidth: {
+        '3': '3px',
+      }
     },
   },
   plugins: [require("@tailwindcss/typography")],
