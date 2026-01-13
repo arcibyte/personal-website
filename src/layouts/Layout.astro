@@ -4,6 +4,7 @@ interface Props {
   lang?: string;
 }
 
+import { ClientRouter } from "astro:transitions";
 import Header from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 
@@ -55,14 +56,14 @@ const currentLang = lang ?? Astro.currentLocale ?? "es";
       content="Applied data science, machine learning, and software engineering."
     />
     <meta name="twitter:image" content="https://arcibyte.is-a.dev/img/OP.jpg" />
+
+    <ClientRouter />
   </head>
 
   <body class="layout-body">
-    <Header />
-    <main>
-      <slot />
-    </main>
-    <Footer />
+    <Header transition:persist />
+    <main transition:animate="fade"><slot /></main>
+    <Footer transition:persist />
   </body>
 </html>
 
@@ -92,6 +93,7 @@ const currentLang = lang ?? Astro.currentLocale ?? "es";
   }
   html {
     background: var(--background);
+    position: relative;
   }
 
   body {
@@ -119,16 +121,25 @@ const currentLang = lang ?? Astro.currentLocale ?? "es";
   h4 {
     font-family: "Space Grotesk", sans-serif;
   }
+
   html::before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: radial-gradient(
+
+    background-image: radial-gradient(
       ellipse at 50% -120%,
-      rgba(255, 119, 0, 0.715) 0%,
-      var(--background) 60%
+      rgba(255, 119, 0, 1) 0%,
+      rgba(255, 119, 0, 0.85) 20%,
+      rgba(255, 119, 0, 0.55) 40%,
+      rgba(255, 119, 0, 0.25) 55%,
+      oklch(14.5% 0 0) 65%
     );
+
+    background-repeat: no-repeat;
+    background-size: 1100px 400px;
+    background-position: top center;
   }
   .nav-container {
     @apply max-w-3xl mx-auto h-14 flex items-center justify-between px-3
