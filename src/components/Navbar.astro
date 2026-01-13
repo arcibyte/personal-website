@@ -20,9 +20,11 @@ const blogHref = getRelativeLocaleUrl(currentLang, "/blog");
 
 <header class="sticky top-4 z-50 w-full px-4" aria-label="Main navigation">
   <nav
-    class="max-w-3xl mx-auto h-14 flex items-center justify-between px-5
-    bg-background/80 backdrop-blur-md border border-muted
-    shadow-sm rounded-full"
+    class="nav-container
+    [animation-timeline:scroll()]
+    [animation-range:0_80px]
+    [animation-fill-mode:both]
+    [animation-name:stickynav]"
   >
     <a
       href={homeHref}
@@ -36,7 +38,9 @@ const blogHref = getRelativeLocaleUrl(currentLang, "/blog");
           class="w-8 h-8 object-cover transition-transform duration-300 group-hover:scale-110"
         />
       </div>
-      <span class="text-sm font-semibold tracking-tight text-foreground">
+      <span
+        class="text-sm font-semibold tracking-tight text-foreground hover:text-primary"
+      >
         Arcibyte
       </span>
     </a>

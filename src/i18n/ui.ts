@@ -13,7 +13,7 @@ export const ui = {
 
     // Profile / Hero
     "profile.name": "Soy Jhon Arciniegas,",
-    "profile.role": "Desarrollador Creativo",
+    "profile.role": "Desarrollador de Software de Datos",
     "profile.description":
       "Construyo herramientas de datos claras y funcionales, priorizando tanto el diseño como la robustez lógica.",
     "profile.cta": "Hablemos",
@@ -53,7 +53,7 @@ export const ui = {
 
     // Profile / Hero
     "profile.name": "I'm Jhon Arciniegas,",
-    "profile.role": "Creative Developer",
+    "profile.role": "Data Software Developer",
     "profile.description":
       "I craft clear and functional data tools, focusing on design and logical robustness.",
     "profile.cta": "Get in touch",
