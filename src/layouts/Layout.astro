@@ -3,11 +3,12 @@ interface Props {
   title: string;
   lang?: string;
 }
-const { title, lang } = Astro.props;
+
 import Header from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 
-const currentLang = lang || Astro.currentLocale || "es";
+const { title, lang } = Astro.props;
+const currentLang = lang ?? Astro.currentLocale ?? "es";
 ---
 
 <!doctype html>
@@ -15,31 +16,29 @@ const currentLang = lang || Astro.currentLocale || "es";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-
     <link
       rel="preload"
       href="/fonts/space-grotesk-v22-latin-700.woff2"
       as="font"
       type="font/woff2"
-      crossorigin="anonymous"
+      crossorigin
     />
     <link
       rel="preload"
       href="/fonts/outfit-v15-latin-regular.woff2"
       as="font"
       type="font/woff2"
-      crossorigin="anonymous"
+      crossorigin
     />
 
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content="Jhon Arciniegas" />
 
     <title>{title}</title>
-
     <link rel="icon" href="/img/icon.png" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Jhon Arciniegas | Portfolio" />
+    <meta property="og:title" content={`${title} | Data Sotfware Developer`} />
     <meta
       property="og:description"
       content="Applied data science, machine learning, and software engineering."
@@ -50,7 +49,7 @@ const currentLang = lang || Astro.currentLocale || "es";
     <meta property="og:image:height" content="1080" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Jhon Arciniegas | Portfolio" />
+    <meta name="twitter:title" content={`${title} | Data Software Developer`} />
     <meta
       name="twitter:description"
       content="Applied data science, machine learning, and software engineering."
@@ -58,7 +57,7 @@ const currentLang = lang || Astro.currentLocale || "es";
     <meta name="twitter:image" content="https://arcibyte.is-a.dev/img/OP.jpg" />
   </head>
 
-  <body class="bg-background p-4 sm:p-0 mx-auto max-w-[580px] text-base">
+  <body class="layout-body">
     <Header />
     <main>
       <slot />
@@ -71,55 +70,77 @@ const currentLang = lang || Astro.currentLocale || "es";
   @tailwind base;
   @tailwind components;
   @tailwind utilities;
+  :root {
+    --background: oklch(14.5% 0 0);
+    --foreground: oklch(75% 0 0);
+    --primary: oklch(92.2% 0 0);
+    --accent: oklch(70.5% 0.213 47.604);
+    --border: rgba(255, 255, 255, 0.1);
+    --muted: oklch(20.5% 0 0);
+  }
   @font-face {
     font-family: "Space Grotesk";
     src: url("/fonts/space-grotesk-v22-latin-700.woff2") format("woff2");
     font-weight: 700;
-    font-style: normal;
-    font-display: block;
+    font-display: swap;
   }
-
   @font-face {
     font-family: "Outfit";
     src: url("/fonts/outfit-v15-latin-regular.woff2") format("woff2");
     font-weight: 400;
-    font-style: normal;
-    font-display: block;
+    font-display: swap;
+  }
+  html {
+    background: var(--background);
   }
 
-  html,
   body {
     font-family: "Outfit", sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
+  .layout-body {
+    @apply p-4 sm:p-0 mx-auto max-w-[580px];
+  }
   .nav-link,
   button {
-    font-family: "Space Grotesk", sans-serif !important;
+    font-family: "Space Grotesk", sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
-
   h1 {
     font-size: 2.5rem;
     line-height: 1.1;
+    font-family: "Space Grotesk", sans-serif;
   }
 
-  p {
-    font-family: "Outfit", sans-serif;
-    line-height: 1.6;
+  h2,
+  h3,
+  h4 {
+    font-family: "Space Grotesk", sans-serif;
   }
-  @layer base {
-    :root {
-      --background: oklch(97% 0 0);
-      --primary: oklch(21% 0.006 285.885);
-      --foreground: oklch(37% 0.013 285.805);
-      --border: oklch(55.6% 0 0);
-      --muted: oklch(92.2% 0 0);
+  html::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(
+      ellipse at 50% -120%,
+      rgba(255, 119, 0, 0.715) 0%,
+      var(--background) 60%
+    );
+  }
+  .nav-container {
+    @apply max-w-3xl mx-auto h-14 flex items-center justify-between px-3
+           rounded-full border border-transparent bg-transparent
+           transition-all duration-500 transform-gpu isolate
+           sticky top-4 z-50;
+  }
+  @keyframes stickynav {
+    to {
+      background-color: var(--background);
+      border-color: var(--border);
+      backdrop-filter: blur(12px);
     }
   }
 </style>

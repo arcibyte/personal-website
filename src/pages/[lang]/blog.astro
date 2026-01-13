@@ -42,14 +42,14 @@ const pageTitle = t("blog.title");
 <Layout title={pageTitle} lang={currentLang}>
     <section class="max-w-3xl mx-auto py-12 px-6">
         <header class="mb-10">
-            <h1
+            <h2
                 class="text-lg md:text-xl font-bold text-primary tracking-tight"
             >
                 {t("blog.title")}
-            </h1>
+            </h2>
             {
                 t("blog.subtitle") && (
-                    <p class="text-base mt-2 font-normal text-foreground">
+                    <p class="text-base mt-2 text-foreground">
                         {t("blog.subtitle")}
                     </p>
                 )
@@ -58,35 +58,36 @@ const pageTitle = t("blog.title");
 
         {
             posts.length === 0 ? (
-                <div class="p-6 text-center border border-dashed border-primary/30 rounded-lg">
+                <div class="p-6 text-center border border-dashed rounded-lg">
                     <p class="text-muted text-sm">{t("blog.empty")}</p>
                 </div>
             ) : (
                 <div class="flex flex-col gap-4">
                     {posts.map((post) => (
                         <a href={post.url} class="group block">
-                            <article class="bg-background border p-5 rounded-xl transition-all hover:border-primary/50">
-                                <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
-                                    <div class="flex flex-col gap-1">
+                            <article class="group relative p-5 border border-border rounded-xl transition-all duration-300 hover:border-accent hover:bg-muted">
+                                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                                    <div class="flex flex-col gap-1.5">
                                         <time
                                             datetime={post.date.toISOString()}
-                                            class="text-xs font-medium text-foreground"
+                                            class="text-[11px] text-foreground tracking-wider"
                                         >
                                             {post.displayDate}
                                         </time>
-                                        <h2 class="text-lg  text-foreground tracking-tight group-hover:text-primary transition-colors">
+
+                                        <h3 class="text-foreground group-hover:text-primary transition-colors duration-300">
                                             {post.title}
-                                        </h2>
+                                        </h3>
                                     </div>
 
-                                    <div class="flex items-center gap-3 mt-2 md:mt-0">
+                                    <div class="flex items-center gap-3">
                                         {post.tags.length > 0 && (
-                                            <span class="text-xs font-medium px-2 py-1 rounded-md bg-primary/10 text-primary">
+                                            <span class="text-[10px] font-bold px-2 py-0.5 rounded border border-accent bg-accent text-accent uppercase tracking-tight">
                                                 {post.tags[0]}
                                             </span>
                                         )}
 
-                                        <span class="text-primary/50 group-hover:text-primary group-hover:translate-x-1 transition-all">
+                                        <span class="text-foreground group-hover:text-accent group-hover:translate-x-1 transition-all duration-300">
                                             →
                                         </span>
                                     </div>
